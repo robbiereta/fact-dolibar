@@ -1,0 +1,45 @@
+{
+  "name": "fact-dolibar",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "main": "src/index.js",
+  "dependencies": {
+    "@material-ui/core": "4.12.2",
+    "@material-ui/data-grid": "4.0.0-alpha.34",
+    "@material-ui/icons": "4.11.2",
+    "@popperjs/core": "2.9.2",
+    "axios": "^0.21.1",
+    "firebase": "9.0.2",
+    "jquery": "3.6.0",
+    "material-ui": "0.20.2",
+    "mdb-react-ui-kit": "1.2.0",
+    "moment": "2.29.1",
+    "react": "16.8.3",
+    "react-datetime-picker": "3.4.0",
+    "react-dom": "16.8.3",
+    "react-hook-form": "7.0.0",
+    "react-router-dom": "5.2.0",
+    "react-scripts": "2.1.8",
+    "react-select": "4.3.1",
+    "react-table": "7.7.0",
+    "receipt": "1.4.0",
+    "styled-components": "5.3.0",
+    "uuid": "8.3.2"
+  },
+  "devDependencies": {
+    "typescript": "3.3.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

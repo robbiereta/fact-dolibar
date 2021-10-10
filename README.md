@@ -1,2 +1,2 @@
-# fact-dolibar
+# fact
 Created with CodeSandbox
