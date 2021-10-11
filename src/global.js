@@ -66,7 +66,7 @@ var finicio;
 var lista = {
   recibos: []
 };
-
+//1.- se conecta al conector de fact_api-dolibarr
 async function global() {
   var config = {
     method: "get",
@@ -86,8 +86,10 @@ async function global() {
 
         if (date >= finicio && date <= ffin) {
           console.log("ok");
-          var totalsiniva = x.total_ht;
+
           var totalconiva = x.total_ttc;
+          var iva = totalconiva * 0.16;
+          var totalsiniva = totalconiva - iva;
           var newCon = {
             clave_producto_servicio: "01010101",
             clave_unidad_de_medida: "ACT",
@@ -104,30 +106,6 @@ async function global() {
     .catch(function (error) {
       console.log(error);
     });
-  // var doubles = cityList.map(function (x) {
-  //   var ticket = x.ticket;
-  //   var id = x.id_ticket;
-  //   var fecha = x.Fecha;
-
-  //   if (fecha <= fecha_fin) {
-  //     var total = 0;
-  //     var prods = "";
-
-  //     ticket.map(function (w) {
-  //       prods += w.descripcion + ",";
-  //       total += Number(w.precio);
-  //       console.log("t:" + total);
-  //     });
-  //     var newCon = {
-  //       id: id,
-  //       total: total,
-  //       prods: prods,
-  //       fecha: fecha
-  //     };
-  //     lista.recibos.push(newCon);
-  //   }
-  //   console.log(lista.recibos);
-  // });
 }
 const format1 = "YYYY-MM-DD HH:mm:ss";
 function doFactura() {
@@ -143,10 +121,10 @@ function doFactura() {
   var subtotal = total3 - ivatotal;
   var factura_templ = {
     emisor: {
-      uuid: "f3313239-a434-4dfd-b10d-63b57e2ea559"
+      uuid: "507d0fa0-9496-424d-9b43-a01a25843f98"
     },
     receptor: {
-      uuid: "277ddda0-6254-11eb-a336-331a303b0a87"
+      uuid: "c9d2ba34-53f9-45cd-83ff-f29ebc3e39e2"
     },
     factura: {
       fecha: dateTime,
@@ -159,18 +137,32 @@ function doFactura() {
       conceptos: notas.partidas
     }
   };
+  console.log(factura_templ);
 
+  var config3 = {
+    method: "get",
+    url: "https://ig28t.sse.codesandbox.io/facturaglobal"
+  };
+
+  axios(config3)
+    .then(function (response) {
+      token = response.data;
+      // console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   enviaFactura(factura_templ);
 }
 function enviaFactura(factura) {
-  var config2 = {
+  var config = {
     method: "post",
-    url: "https://fvo7y.sse.codesandbox.io/facturaglobal",
+    url: "https://ig28t.sse.codesandbox.io/facturaglobal",
     data: factura,
     token: token
   };
 
-  axios(config2)
+  axios(config)
     .then(function (response) {
       console.log(JSON.stringify(response.data));
     })
