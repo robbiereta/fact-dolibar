@@ -62,7 +62,7 @@ var fecha_fin;
 var fecha_inicio;
 var ffin;
 var finicio;
-
+var total4 = 0;
 var lista = {
   recibos: []
 };
@@ -80,7 +80,8 @@ async function global() {
 
   axios(config)
     .then(function (response) {
-      var doubles = response.data.map(function (x) {
+      var data = response.data;
+      var doubles = data.map(function (x) {
         var date = x.datem * 1000;
         var fechap = new Date(date);
 
@@ -102,12 +103,18 @@ async function global() {
           console.log(notas.partidas);
         }
       });
+      notas.partidas.map(function (y) {
+        total4 += Number(y.total);
+        console.log("total4:" + total4);
+      });
+      jquery("#root").append("total:" + total4);
     })
     .catch(function (error) {
       console.log(error);
     });
 }
 const format1 = "YYYY-MM-DD HH:mm:ss";
+
 function doFactura() {
   var total3 = 0;
 
@@ -121,10 +128,10 @@ function doFactura() {
   var subtotal = total3 - ivatotal;
   var factura_templ = {
     emisor: {
-      uuid: "507d0fa0-9496-424d-9b43-a01a25843f98"
+      uuid: "f3313239-a434-4dfd-b10d-63b57e2ea559"
     },
     receptor: {
-      uuid: "c9d2ba34-53f9-45cd-83ff-f29ebc3e39e2"
+      uuid: "277ddda0-6254-11eb-a336-331a303b0a87"
     },
     factura: {
       fecha: dateTime,
@@ -141,7 +148,7 @@ function doFactura() {
 
   var config3 = {
     method: "get",
-    url: "https://ig28t.sse.codesandbox.io/facturaglobal"
+    url: "https://jsonserverobbie.herokuapp.com/facturaglobal"
   };
 
   axios(config3)
@@ -157,7 +164,7 @@ function doFactura() {
 function enviaFactura(factura) {
   var config = {
     method: "post",
-    url: "https://ig28t.sse.codesandbox.io/facturaglobal",
+    url: "https://jsonserverobbie.herokuapp.com/facturaglobal",
     data: factura,
     token: token
   };
